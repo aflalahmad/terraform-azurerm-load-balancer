@@ -24,7 +24,7 @@ data "azurerm_public_ip" "pubip" {
 }
 module "load-balancer" {
   source  = "aflalahmad/load-balancer/azurerm"
-  version = "0.0.2"
+  version = "0.0.3"
   lbname = "lbteam1"
   resourcegroup_name = data.azurerm_resource_group.rg.name
   location = "Westus"
