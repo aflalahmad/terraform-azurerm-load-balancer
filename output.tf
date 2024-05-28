@@ -1,6 +1,6 @@
 output "lb_id" {
   description = "The ID of the created Azure Load Balancer"
-  value       = azurerm_lb.lb.id
+  value       = azurerm_lb.example.id
 }
 
 output "frontend_ip_configuration" {

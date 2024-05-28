@@ -2,7 +2,7 @@ variable "lbname" {
   type = string
   description = "This is the load balancer name."
   validation {
-    condition     = length(var.lb_name) > 0
+    condition     = length(var.lbname) > 0
     error_message = "The load balancer name must not be empty."
   }
 }
@@ -37,13 +37,13 @@ variable "frontend_ip_configuration" {
   }
 
   validation {
-    condition     = can(var.frontend_ip_configuration) && can(var.frontend_ip_configuration["example"]) && length(var.frontend_ip_configuration["example"].name) > 0
-    error_message = "Frontend IP configuration 'name' must be provided and must not be empty."
+    condition     = alltrue([for k, v in var.frontend_ip_configuration : can(v.name) && length(v.name) > 0])
+    error_message = "Each frontend IP configuration 'name' must be provided and must not be empty."
   }
 
   validation {
-    condition     = can(var.frontend_ip_configuration) && can(var.frontend_ip_configuration["example"]) && length(var.frontend_ip_configuration["example"].public_ip_address_id) > 0
-    error_message = "Frontend IP configuration 'public_ip_address_id' must be provided and must not be empty."
+    condition     = alltrue([for k, v in var.frontend_ip_configuration : can(v.public_ip_address_id) && length(v.public_ip_address_id) > 0])
+    error_message = "Each frontend IP configuration 'public_ip_address_id' must be provided and must not be empty."
   }
 }
 
